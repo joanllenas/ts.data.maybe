@@ -1,5 +1,7 @@
 # Maybe
 
+[![Build Status](https://travis-ci.org/joanllenas/ts.data.maybe.svg?branch=master)](https://travis-ci.org/joanllenas/ts.data.maybe)
+
 Maybe encapulates the idea of a value that might not be there.
 
 A Maybe value can either be `Just` some value or `Nothing`.
