@@ -97,7 +97,7 @@ describe('Maybe', () => {
     const n = index+3;
     describe(`map${n}`, () => {
       const gt = (...nums: number[]) => nums.every(num => num > 3);
-      const just4Array = (len) => Array.apply(null, Array(len)).map(_ => just(4));
+      const just4Array = (len: number) => Array.apply(null, Array(len)).map(() => just(4));
       it('should return the true when all are greater than 3', () => {
         const result = f(gt, ...just4Array(n));
         expect(withDefault(result, false)).to.be.true;
