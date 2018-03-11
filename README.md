@@ -1,6 +1,7 @@
 # Maybe
 
 [![Build Status](https://travis-ci.org/joanllenas/ts.data.maybe.svg?branch=master)](https://travis-ci.org/joanllenas/ts.data.maybe)
+[![npm version](https://badge.fury.io/js/ts.data.maybe.svg)](https://badge.fury.io/js/ts.data.maybe)
 
 Maybe encapulates the idea of a value that might not be there.
 
