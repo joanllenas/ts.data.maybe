@@ -41,7 +41,7 @@ const maybeIsUnderage = map(isUnderage, user.age);
 caseOf({
   Nothing: () => console.log("You can't drink"),
   Just: isunderage => console.log(isunderage ? "You can't drink" : "You can drink")
-}, maybeIsUnderage);
+}, maybeIsUnderage); // You can't drink
 
 const head = (arr: number[]) => arr.length > 0 ? just(arr[0]) : nothing();
 const toStringDay = (d: number) => d >= 1 && d <= 7 ? just(['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fry', 'Sat'][d-1]) : nothing();
