@@ -8,9 +8,20 @@
     "build": "tsc",
     "test": "mocha --reporter spec --compilers ts:ts-node/register 'src/**/*.spec.ts'"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "keywords": [
+    "maybe",
+    "typescript"
+  ],
+  "author": "Joan Llenas",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/joanllenas/ts.data.maybe"
+  },
+  "bugs": {
+    "url": "https://github.com/joanllenas/ts.data.maybe/issues"
+  },
+  "homepage": "https://github.com/joanllenas/ts.data.maybe#readme",
   "devDependencies": {
     "@types/chai": "^4.1.2",
     "@types/mocha": "^2.2.48",
