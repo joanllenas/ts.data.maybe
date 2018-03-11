@@ -6,6 +6,7 @@
   "types": "dist/index.d.ts",
   "scripts": {
     "build": "tsc",
+    "pub": "tsc && npm publish",
     "test": "mocha --reporter spec --compilers ts:ts-node/register 'src/**/*.spec.ts'"
   },
   "keywords": [
