@@ -39,7 +39,7 @@ const user: User = {
 }
 
 const getFullName = (name: string, surname: string) => `${name} ${surname}`;
-const maybeFullname = map2(getFullName, user.name, user.surname);
+const maybeFullname = map2(getFullName, user.name, user.surname); // Just<string>('John Doe')
 const fullName = withDefault(maybeFullname, ''); // 'John Doe'
 ````
 
