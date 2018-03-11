@@ -1,0 +1,21 @@
+{
+  "name": "ts.data.maybe",
+  "version": "0.9.0",
+  "description": "A Typescript implementation of the Maybe data type",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "test": "mocha --reporter spec --compilers ts:ts-node/register 'src/**/*.spec.ts'"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/chai": "^4.1.2",
+    "@types/mocha": "^2.2.48",
+    "chai": "^4.1.2",
+    "mocha": "^5.0.4",
+    "ts-node": "^5.0.1",
+    "typescript": "^2.7.2"
+  }
+}
