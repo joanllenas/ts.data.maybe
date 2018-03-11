@@ -37,10 +37,9 @@ const fullName = withDefault(maybeFullname, ''); // 'John Doe'
 
 const isUnderage = (age: number) => age < 18;
 const maybeIsUnderage = map(isUnderage, user.age);
-
-caseOf({
-  Nothing: () => console.log("You can't drink"),
-  Just: isunderage => console.log(isunderage ? "You can't drink" : "You can drink")
+const msg = caseOf({
+  Nothing: () => "You can't drink",
+  Just: isunderage => isunderage ? "You can't drink" : "You can drink"
 }, maybeIsUnderage); // You can't drink
 
 const head = (arr: number[]) => arr.length > 0 ? just(arr[0]) : nothing();
@@ -52,7 +51,8 @@ const stringMonth = andThen(toStringDay, head([2, 4, 6])); // Just('Mon')
 
 _(Inspired by elm-lang)_
 
-### `just<T>(value: T): Just<T>`
+### just
+`just<T>(value: T): Just<T>`
 
 Wraps a value in an instance of `Just`.
 
@@ -60,7 +60,8 @@ Wraps a value in an instance of `Just`.
 just(5); // Just<number>(5)
 ````
 
-### `nothing(): Nothing`
+### nothing
+`nothing(): Nothing`
 
 Creates an instance of `Nothing`.
 
@@ -68,14 +69,16 @@ Creates an instance of `Nothing`.
 nothing(); // Nothing
 ````
 
-### `isJust(value: Maybe<any>): boolean`
+### isJust
+`isJust(value: Maybe<any>): boolean`
 
 Returns true if a value is an instance of `Just`.
 
 ````ts
 isJust(nothing()); // false
 ````
-### `isNothing(value: Maybe<any>): boolean`
+### isNothing
+`isNothing(value: Maybe<any>): boolean`
 
 Returns true if a value is an instance of `Nothing`.
 
@@ -86,7 +89,8 @@ isNothing(null) // true
 isNothing(nothing()) // true
 ````
 
-### `withDefault<A>(value: Maybe<A>, defaultValue: A): A`
+### withDefault
+`withDefault<A>(value: Maybe<A>, defaultValue: A): A`
 
 If `value` is an instance of `Just` it returns its wrapped value, if it's an instance of `Nothing` it returns the `defaultValue`.
 
@@ -95,7 +99,11 @@ withDefault(just(5), 0); // 5
 withDefault(nothing(), 'hola'); // 'hola'
 ````
 
-### `caseOf`
+### caseOf
+`caseOf = <A, B>(caseof: {
+  Just: (v: A) => B;
+  Nothing: () => B;
+}, value: Maybe<A>): B`
 
 Run different computations depending on whether a `Maybe` is `Just` or `Nothing`.
 
@@ -106,7 +114,8 @@ caseOf({
 }, just(5)); // 'Launch 5 missiles'
 ````
 
-### `map<A, B>(f: (a: A) => B, value: Maybe<A>): Maybe<B>`
+### map
+`map<A, B>(f: (a: A) => B, value: Maybe<A>): Maybe<B>`
 
 Transforms a `Maybe` value with a given function.
 
@@ -153,7 +162,8 @@ mapN<A, B>(
 ): Maybe<B>
 ````
 
-### `andThen = <A, B>(f: (a: A) => Maybe<B>, v: Maybe<A>): Maybe<B>`
+### andThen
+`andThen = <A, B>(f: (a: A) => Maybe<B>, v: Maybe<A>): Maybe<B>`
 
 Chains together many computations that may fail.
 
