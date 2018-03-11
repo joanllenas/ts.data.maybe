@@ -16,6 +16,12 @@ type Maybe<T> =
 
 Where `Nothing` is an instance of `Nothing`, `null` or `undefined`, and `Just` represents any non `Nothing` value.
 
+## Install
+
+````
+npm install ts.data.maybe --save
+````
+
 ## Example
 
 ````ts
