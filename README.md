@@ -16,35 +16,22 @@ Where `Nothing` is an instance of `Nothing`, `null` or `undefined`, and `Just` r
 ## Example
 
 ````ts
-import { Maybe, nothing, just, withDefault, caseOf, map, map2, andThen } from 'ts.data.maybe';
+import { Maybe, just, withDefault, map2 } from 'ts.data.maybe';
 
 interface User {
   email: string;
   name: Maybe<string>;
   surname: Maybe<string>;
-  age: Maybe<number>;
 }
 const user: User = {
   email: 'user@example.com',
   name: just('John'),
-  surname: just('Doe'),
-  age: nothing()
+  surname: just('Doe')
 }
 
 const getFullName = (name: string, surname: string) => `${name} ${surname}`;
 const maybeFullname = map2(getFullName, user.name, user.surname);
 const fullName = withDefault(maybeFullname, ''); // 'John Doe'
-
-const isUnderage = (age: number) => age < 18;
-const maybeIsUnderage = map(isUnderage, user.age);
-const msg = caseOf({
-  Nothing: () => "You can't drink",
-  Just: isunderage => isunderage ? "You can't drink" : "You can drink"
-}, maybeIsUnderage); // You can't drink
-
-const head = (arr: number[]) => arr.length > 0 ? just(arr[0]) : nothing();
-const toStringDay = (d: number) => d >= 1 && d <= 7 ? just(['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fry', 'Sat'][d-1]) : nothing();
-const stringMonth = andThen(toStringDay, head([2, 4, 6])); // Just('Mon')
 ````
 
 ## Api
