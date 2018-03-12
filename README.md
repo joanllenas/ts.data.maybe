@@ -118,7 +118,7 @@ Transforms a `Maybe` value with a given function.
 ````ts
 const add1 = (n: number) => n + 1;
 map(add1, just(4)); // Just<number>(5)
-map(add1, nothing(4)); // Nothing
+map(add1, nothing()); // Nothing
 ````
 
 There are `map2`, `map3`, `map4`, `map5` and `mapN` if you need to parametrize the function with more than one argument. (`mapN` only accepts arguments of the same type).
