@@ -1,7 +1,7 @@
-export { 
-  Just, 
-  Nothing, 
-  Maybe, 
+export {
+  Just,
+  Nothing,
+  Maybe,
   just,
   nothing,
   isJust,
