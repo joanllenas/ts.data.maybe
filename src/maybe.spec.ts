@@ -158,15 +158,6 @@ describe('Maybe', () => {
       const result = andThen(head, nothing());
       expect(withDefault(result, '')).to.equal('');
     });
-    it('should calculate the head', () => {
-      const head = <T>(arr: T[]): Maybe<T> => {
-        if (arr.length === 0) {
-          nothing();
-        }
-        return just(arr.slice(0, 1)[0]);
-      };
-      expect(map(add1, andThen(head, just([1, 2, 3])))).to.equal(2);
-    });
   });
 
   describe('caseOf', () => {
