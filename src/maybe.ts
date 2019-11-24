@@ -1,9 +1,9 @@
 class Just<T> {
-  private _tag = "Just";
+  private _tag = 'Just';
   constructor(readonly _value: T) {}
 }
 class Nothing<T> {
-  private _tag = "Nothing";
+  private _tag = 'Nothing';
 }
 
 export type Maybe<T> = Just<T> | Nothing<T>;

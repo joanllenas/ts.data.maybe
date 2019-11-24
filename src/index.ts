@@ -13,4 +13,4 @@ export {
   mapN,
   andThen,
   caseOf
-} from "./maybe";
+} from './maybe';
