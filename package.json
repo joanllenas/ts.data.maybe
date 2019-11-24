@@ -7,7 +7,7 @@
   "scripts": {
     "build": "tsc",
     "pub": "tsc && npm publish",
-    "test": "mocha --reporter spec --compilers ts:ts-node/register 'src/**/*.spec.ts'"
+    "test": "mocha --require ts-node/register 'src/**/*.spec.ts'"
   },
   "keywords": [
     "maybe",
@@ -24,12 +24,12 @@
   },
   "homepage": "https://github.com/joanllenas/ts.data.maybe#readme",
   "devDependencies": {
-    "@types/chai": "^4.1.2",
-    "@types/mocha": "^2.2.48",
-    "chai": "^4.1.2",
-    "mocha": "^5.0.4",
-    "prettier": "^1.14.3",
-    "ts-node": "^5.0.1",
-    "typescript": "^2.7.2"
+    "@types/chai": "^4.2.5",
+    "@types/mocha": "^5.2.7",
+    "chai": "^4.2.0",
+    "mocha": "^6.2.2",
+    "prettier": "^1.19.1",
+    "ts-node": "^8.5.2",
+    "typescript": "^3.7.2"
   }
 }
