@@ -104,6 +104,17 @@ describe('Maybe', () => {
       const maybeFullname = map2(fullname, maybeName, nothing());
       expect(isNothing(maybeFullname)).to.be.true;
     });
+    it('another example with numbers', () => {
+      const safeParseInt = (num: string): Maybe<number> => {
+        const n = parseInt(num, 10);
+        return isNaN(n) ? nothing() : just(n);
+      };
+      const sum = (x: number, y: number) => x + y;
+      const safeStringSum = (x: string, y: string) =>
+        map2(sum, safeParseInt(x), safeParseInt(y));
+      expect(safeStringSum('1', '2')).to.deep.equal(just(3));
+      expect(safeStringSum('a', '2')).to.deep.equal(nothing());
+    });
   });
 
   [map3, map4, map5].forEach((f: Function, index) => {
@@ -161,20 +172,22 @@ describe('Maybe', () => {
 
   describe('caseOf', () => {
     it('should Launch 5 missiles', () => {
-      const result = caseOf(
+      let result;
+      caseOf(
         {
-          Nothing: () => 'zzz',
-          Just: n => `Launch ${n} missiles`
+          Nothing: () => (result = 'zzz'),
+          Just: n => (result = `Launch ${n} missiles`)
         },
         just('5')
       );
       expect(result).to.equal('Launch 5 missiles');
     });
     it('should zzz', () => {
-      const result = caseOf(
+      let result;
+      caseOf(
         {
-          Nothing: () => 'zzz',
-          Just: n => `Launch ${n} missiles`
+          Nothing: () => (result = 'zzz'),
+          Just: n => (result = `Launch ${n} missiles`)
         },
         nothing()
       );

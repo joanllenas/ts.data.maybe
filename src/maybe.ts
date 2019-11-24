@@ -141,17 +141,18 @@ export const andThen = <A, B>(f: (a: A) => Maybe<B>, v: Maybe<A>): Maybe<B> => {
   }
 };
 
-export const caseOf = <A, B>(
+export const caseOf = <A>(
   caseof: {
-    Just: (v: A) => B;
-    Nothing: () => B;
+    Just: (v: A) => void;
+    Nothing: () => void;
   },
   value: Maybe<A>
-): B => {
+): void => {
   switch (isNothing(value)) {
     case true:
-      return caseof.Nothing();
+      caseof.Nothing();
+      break;
     case false:
-      return caseof.Just((value as Just<A>)._value);
+      caseof.Just((value as Just<A>)._value);
   }
 };

@@ -100,15 +100,15 @@ withDefault(nothing(), 'hola'); // 'hola'
 
 ### caseOf
 
-`caseOf = <A, B>(caseof: { Just: (v: A) => B; Nothing: () => B; }, value: Maybe<A>): B`
+`caseOf<A>(caseof: {Just: (v: A) => void; Nothing: () => void;}, value: Maybe<A>): void`
 
 Run different computations depending on whether a `Maybe` is `Just` or `Nothing`.
 
 ```ts
 caseOf(
   {
-    Nothing: () => 'zzz',
-    Just: n => `Launch ${n} missiles`
+    Nothing: () => console.log('Do nothing'),
+    Just: n => console.log(`Launch ${n} missiles`)
   },
   just(5)
 ); // 'Launch 5 missiles'
@@ -126,7 +126,7 @@ map(add1, just(4)); // Just<number>(5)
 map(add1, nothing()); // Nothing
 ```
 
-There are `map2`, `map3`, `map4`, `map5` and `mapN` if you need to parametrize the function with more than one argument. (`mapN` only accepts arguments of the same type).
+There are `map2`, `map3`, `map4`, `map5` and `mapN` functions too:
 
 ```ts
 map2<A, B, C>(
@@ -134,6 +134,24 @@ map2<A, B, C>(
   a: Maybe<A>, b: Maybe<B>
 ): Maybe<C>
 ```
+
+An example with `map2`:
+
+```ts
+const safeParseInt = (num: string): Maybe<number> => {
+  const n = parseInt(num, 10);
+  return isNaN(n) ? nothing() : just(n);
+};
+const sum = (x: number, y: number) => x + y;
+const safeStringSum = (x: string, y: string) =>
+  map2(sum, safeParseInt(x), safeParseInt(y));
+safeStringSum('1', '2'); // Just<number>(3)
+safeStringSum('a', '2'); // Nothing
+```
+
+If you need to parametrize the function with more than one argument, use the `map` that matches your parametrization.
+
+> `mapN` only accepts arguments of the same type)
 
 ```ts
 map3<A, B, C, D>(
