@@ -1,33 +1,33 @@
-export class Just<T> {
-  private _tag = 'Just';
+class Just<T> {
+  private _tag = "Just";
   constructor(readonly _value: T) {}
 }
-export class Nothing {
-  private _tag = 'Nothing';
+class Nothing<T> {
+  private _tag = "Nothing";
 }
 
-export type Maybe<T> = Just<T> | Nothing;
+export type Maybe<T> = Just<T> | Nothing<T>;
 
-export const just = <T>(value: T): Just<T> => {
+export const just = <T>(value: T): Maybe<T> => {
   return new Just(value);
 };
 
-export const nothing = (): Nothing => {
+export const nothing = <T>(): Maybe<T> => {
   return new Nothing();
 };
 
-export const isJust = (value: Maybe<any>) => {
+export const isJust = <T>(value: Maybe<T>) => {
   return value instanceof Just;
 };
 
-export const isNothing = (value: Maybe<any>) => {
+export const isNothing = <T>(value: Maybe<T>) => {
   return value instanceof Nothing || value === null || value === undefined;
 };
 
-export const withDefault = <A>(value: Maybe<A>, defaultValue: A): A => {
+export const withDefault = <T>(value: Maybe<T>, defaultValue: T): T => {
   switch (isNothing(value)) {
     case false:
-      return (value as Just<A>)._value;
+      return (value as Just<T>)._value;
     case true:
       return defaultValue;
   }
@@ -102,7 +102,11 @@ export const map5 = <A, B, C, D, E, F>(
   e: Maybe<E>
 ): Maybe<F> => {
   switch (
-    isNothing(a) || isNothing(b) || isNothing(c) || isNothing(d) || isNothing(e)
+    isNothing(a) ||
+    isNothing(b) ||
+    isNothing(c) ||
+    isNothing(d) ||
+    isNothing(e)
   ) {
     case true:
       return nothing();

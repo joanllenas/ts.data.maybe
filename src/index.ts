@@ -1,6 +1,4 @@
 export {
-  Just,
-  Nothing,
   Maybe,
   just,
   nothing,
@@ -15,4 +13,4 @@ export {
   mapN,
   andThen,
   caseOf
-} from './maybe';
+} from "./maybe";
