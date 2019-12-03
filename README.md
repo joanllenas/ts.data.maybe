@@ -56,13 +56,15 @@ just(5); // Just<number>(5)
 
 ### nothing
 
-`nothing(): Maybe<T>`
+`nothing<T>(): Maybe<T>`
 
 Creates an instance of `Nothing`.
 
 ```ts
-nothing(); // Nothing
+nothing<number>(); // Nothing<number>
 ```
+
+> It's recommended to parametrize the function, otherwise the resolved type will be `Maybe<unknown>`.
 
 ### isJust
 
