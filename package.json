@@ -1,13 +1,15 @@
 {
   "name": "ts.data.maybe",
-  "version": "2.1.0",
+  "version": "2.1.1",
   "description": "A Typescript implementation of the Maybe data type",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "scripts": {
     "build": "tsc",
-    "pub": "tsc && npm publish",
-    "test": "mocha --require ts-node/register 'src/**/*.spec.ts'"
+    "test": "mocha --require ts-node/register 'src/**/*.spec.ts'",
+    "lint": "tslint -p ./tsconfig.json",
+    "prepub": "npm run test && npm run lint",
+    "pub": "npm run build && npm publish"
   },
   "keywords": [
     "maybe",
@@ -30,6 +32,7 @@
     "mocha": "^6.2.2",
     "prettier": "^1.19.1",
     "ts-node": "^8.5.2",
+    "tslint": "^5.20.1",
     "typescript": "^3.7.2"
   }
 }

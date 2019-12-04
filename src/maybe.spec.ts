@@ -117,20 +117,20 @@ describe('Maybe', () => {
     });
   });
 
-  [map3, map4, map5].forEach((f: Function, index) => {
+  [map3, map4, map5].forEach((fn: (...rest: any[]) => any, index) => {
     const n = index + 3;
     describe(`map${n}`, () => {
       const gt = (...nums: number[]) => nums.every(num => num > 3);
       const just4Array = (len: number) =>
         Array.apply(null, Array(len)).map(() => just(4));
       it('should return the true when all are greater than 3', () => {
-        const result = f(gt, ...just4Array(n));
+        const result = fn(gt, ...just4Array(n));
         expect(withDefault(result, false)).to.be.true;
       });
       it('should be Nothing when any is Nothing', () => {
         const arr: Maybe<number>[] = just4Array(n);
         arr[2] = nothing();
-        const result = f(gt, ...arr);
+        const result = fn(gt, ...arr);
         expect(isNothing(result)).to.be.true;
       });
     });
