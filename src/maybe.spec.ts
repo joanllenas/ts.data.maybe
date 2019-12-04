@@ -29,10 +29,10 @@ describe('Maybe', () => {
       expect(isJust(just('hola'))).to.be.true;
     });
     it('should return false when null is provided', () => {
-      expect(isJust(null)).to.be.false;
+      expect(isJust(null as any)).to.be.false;
     });
     it('should return false when undefined is provided', () => {
-      expect(isJust(undefined)).to.be.false;
+      expect(isJust(undefined as any)).to.be.false;
     });
   });
 
@@ -44,10 +44,10 @@ describe('Maybe', () => {
       expect(isNothing(nothing())).to.be.true;
     });
     it('should return true when null is provided', () => {
-      expect(isNothing(null)).to.be.true;
+      expect(isNothing(null as any)).to.be.true;
     });
     it('should return true when undefined is provided', () => {
-      expect(isNothing(undefined)).to.be.true;
+      expect(isNothing(undefined as any)).to.be.true;
     });
   });
 
@@ -59,10 +59,10 @@ describe('Maybe', () => {
       expect(withDefault(nothing(), 0)).to.equal(0);
     });
     it('should return the default value when null is provided', () => {
-      expect(withDefault(null, 1)).to.equal(1);
+      expect(withDefault(null as any, 1)).to.equal(1);
     });
     it('should return the default value when undefined is provided', () => {
-      expect(withDefault(undefined, 2)).to.equal(2);
+      expect(withDefault(undefined as any, 2)).to.equal(2);
     });
   });
 
@@ -77,11 +77,11 @@ describe('Maybe', () => {
       expect(isNothing(result)).to.be.true;
     });
     it('should be isNothing === true when mapping over null', () => {
-      const result = map(add1, null);
+      const result = map(add1, null as any);
       expect(isNothing(result)).to.be.true;
     });
     it('should be isNothing === true when mapping over undefined', () => {
-      const result = map(add1, undefined);
+      const result = map(add1, undefined as any);
       expect(isNothing(result)).to.be.true;
     });
     it('should return 5 when adding 1 to Just(5)', () => {
