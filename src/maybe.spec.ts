@@ -172,22 +172,20 @@ describe('Maybe', () => {
 
   describe('caseOf', () => {
     it('should Launch 5 missiles', () => {
-      let result;
-      caseOf(
+      const result = caseOf(
         {
-          Nothing: () => (result = 'zzz'),
-          Just: n => (result = `Launch ${n} missiles`)
+          Nothing: () => 'zzz',
+          Just: n => `Launch ${n} missiles`
         },
         just('5')
       );
       expect(result).to.equal('Launch 5 missiles');
     });
     it('should zzz', () => {
-      let result;
-      caseOf(
+      const result = caseOf(
         {
-          Nothing: () => (result = 'zzz'),
-          Just: n => (result = `Launch ${n} missiles`)
+          Nothing: () => 'zzz',
+          Just: n => `Launch ${n} missiles`
         },
         nothing()
       );

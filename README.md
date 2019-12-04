@@ -102,15 +102,15 @@ withDefault(nothing(), 'hola'); // 'hola'
 
 ### caseOf
 
-`caseOf<A>(caseof: {Just: (v: A) => void; Nothing: () => void;}, value: Maybe<A>): void`
+`caseOf<A, B>(caseof: {Just: (v: A) => B; Nothing: () => B;}, value: Maybe<A>): B`
 
-Run different computations depending on whether a `Maybe` is `Just` or `Nothing`.
+Run different computations depending on whether a `Maybe` is `Just` or `Nothing` and returns the result.
 
 ```ts
 caseOf(
   {
-    Nothing: () => console.log('Do nothing'),
-    Just: n => console.log(`Launch ${n} missiles`)
+    Nothing: () => 'Do nothing',
+    Just: n => `Launch ${n} missiles`
   },
   just(5)
 ); // 'Launch 5 missiles'
