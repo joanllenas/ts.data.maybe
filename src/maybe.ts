@@ -2,11 +2,11 @@ class Just<T> {
   private _tag = 'Just';
   constructor(readonly _value: T) {}
 }
-class Nothing<T> {
+class Nothing {
   private _tag = 'Nothing';
 }
 
-export type Maybe<T> = Just<T> | Nothing<T>;
+export type Maybe<T> = Just<T> | Nothing;
 
 export const just = <T>(value: T): Maybe<T> => {
   return new Just(value);

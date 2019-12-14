@@ -8,7 +8,7 @@ Maybe encapsulates the idea of a value that might not be there.
 A Maybe value can either be `Just` some value or `Nothing`.
 
 ```ts
-type Maybe<T> = Just<T> | Nothing<T>;
+type Maybe<T> = Just<T> | Nothing;
 ```
 
 Where `Nothing` is an instance of `Nothing`, `null` or `undefined`, and `Just` represents any non `Nothing` value.
@@ -51,7 +51,7 @@ _(Inspired by elm-lang)_
 Wraps a value in an instance of `Just`.
 
 ```ts
-just(5); // Just<number>(5)
+just(5); // Just(5) (Maybe<number>)
 ```
 
 ### nothing
@@ -61,10 +61,10 @@ just(5); // Just<number>(5)
 Creates an instance of `Nothing`.
 
 ```ts
-nothing<number>(); // Nothing<number>
+nothing<number>(); // Nothing (Maybe<number>)
 ```
 
-> It's recommended to parametrize the function, otherwise the resolved type will be `Maybe<unknown>`.
+> It's recommended to parametrize the function, otherwise the resolved type will be `Maybe<unknown>` and type won't flow through `map`, `andThen` and so on.
 
 ### isJust
 
