@@ -19,7 +19,7 @@ Where `Nothing` is an instance of `Nothing`, `null` or `undefined`, and `Just` r
 npm install ts.data.maybe --save
 ```
 
-## Example
+## Example 1
 
 ```ts
 import { Maybe, just, withDefault, map2 } from 'ts.data.maybe';
@@ -37,7 +37,24 @@ const user: User = {
 
 const getFullName = (name: string, surname: string) => `${name} ${surname}`;
 const maybeFullname = map2(getFullName, user.name, user.surname); // Just<string>('John Doe')
-const fullName = withDefault(maybeFullname, ''); // 'John Doe'
+console.log(withDefault(maybeFullname, '')); // 'John Doe'
+```
+
+## Example 2
+
+```ts
+const prices: Maybe<number>[] = [
+  just(300),
+  nothing(),
+  just(500),
+  just(150),
+  nothing()
+];
+const sum = (a: number, b: number) => a + b;
+const total = prices
+  .filter(n => !equals(n, nothing()))
+  .reduce((acc, current) => map2(sum, acc, current), just(0));
+console.log(withDefault(total, 0)); // 950
 ```
 
 ## Api
@@ -46,7 +63,7 @@ _(Inspired by elm-lang)_
 
 ### just
 
-`just<T>(value: T): Maybe<T>`
+`just<T>(value: T): Maybe<T>;`
 
 Wraps a value in an instance of `Just`.
 
@@ -56,7 +73,7 @@ just(5); // Just(5) (Maybe<number>)
 
 ### nothing
 
-`nothing<T>(): Maybe<T>`
+`nothing<T>(): Maybe<T>;`
 
 Creates an instance of `Nothing`.
 
@@ -68,7 +85,7 @@ nothing<number>(); // Nothing (Maybe<number>)
 
 ### isJust
 
-`isJust(value: Maybe<any>): boolean`
+`isJust(value: Maybe<any>): boolean;`
 
 Returns true if a value is an instance of `Just`.
 
@@ -78,7 +95,7 @@ isJust(nothing()); // false
 
 ### isNothing
 
-`isNothing(value: Maybe<any>): boolean`
+`isNothing(value: Maybe<any>): boolean;`
 
 Returns true if a value is an instance of `Nothing`.
 
@@ -91,7 +108,7 @@ isNothing(nothing()); // true
 
 ### withDefault
 
-`withDefault<A>(value: Maybe<A>, defaultValue: A): A`
+`withDefault<A>(value: Maybe<A>, defaultValue: A): A;`
 
 If `value` is an instance of `Just` it returns its wrapped value, if it's an instance of `Nothing` it returns the `defaultValue`.
 
@@ -102,7 +119,7 @@ withDefault(nothing(), 'hola'); // 'hola'
 
 ### caseOf
 
-`caseOf<A, B>(caseof: {Just: (v: A) => B; Nothing: () => B;}, value: Maybe<A>): B`
+`caseOf<A, B>(caseof: {Just: (v: A) => B; Nothing: () => B;}, value: Maybe<A>): B;`
 
 Run different computations depending on whether a `Maybe` is `Just` or `Nothing` and returns the result.
 
@@ -118,7 +135,7 @@ caseOf(
 
 ### map
 
-`map<A, B>(f: (a: A) => B, value: Maybe<A>): Maybe<B>`
+`map<A, B>(f: (a: A) => B, value: Maybe<A>): Maybe<B>;`
 
 Transforms a `Maybe` value with a given function.
 
@@ -185,7 +202,7 @@ mapN<A, B>(
 
 ### andThen
 
-`andThen = <A, B>(f: (a: A) => Maybe<B>, v: Maybe<A>): Maybe<B>`
+`andThen<A, B>(f: (a: A) => Maybe<B>, v: Maybe<A>): Maybe<B>;`
 
 Chains together many computations that may fail.
 
@@ -193,4 +210,19 @@ Chains together many computations that may fail.
 const head = (arr: string[]) => (arr.length > 0 ? just(arr[0]) : nothing());
 andThen(head, just(['a', 'b', 'c'])); // Just<string>('a')
 andThen(head, just([])); // Nothing
+```
+
+### equals
+
+`equals<T>(a: Maybe<T>, b: Maybe<T>): boolean;`
+
+Compares two `Maybe` instances and returns `true` when both are `Nothing` or their wrapped values are strictly equal (===), `false` otherwise.
+
+```ts
+equals(just(5), just(5); // true
+equals(just(6), just(5); // false
+equals(nothing(), just(5); // false
+equals(nothing(), nothing(); // true
+equals(null, nothing(); // true
+equals(undefined, nothing(); // true
 ```

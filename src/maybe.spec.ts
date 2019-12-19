@@ -12,7 +12,8 @@ import {
   map5,
   mapN,
   andThen,
-  caseOf
+  caseOf,
+  equals
 } from './maybe';
 
 import * as chai from 'chai';
@@ -190,6 +191,65 @@ describe('Maybe', () => {
         nothing()
       );
       expect(result).to.equal('zzz');
+    });
+  });
+
+  describe('equals', () => {
+    it('just(0) and just(0) should be equal', () => {
+      expect(equals(just(0), just(0))).to.be.true;
+    });
+    it('just(5) and just(0) should not be equal', () => {
+      expect(equals(just(5), just(0))).not.to.be.true;
+    });
+    it('nothing() and just(5) should not be equal', () => {
+      expect(equals(nothing(), just(5))).not.to.be.true;
+    });
+    it('nothing() and nothing(5) should be equal', () => {
+      expect(equals(nothing(), nothing())).to.be.true;
+    });
+    it('nothing() and null should be equal', () => {
+      expect(equals(nothing(), null as any)).to.be.true;
+    });
+    it('nothing() and undefined should be equal', () => {
+      expect(equals(nothing(), undefined as any)).to.be.true;
+    });
+  });
+
+  describe('examples', () => {
+    it('should work 1', () => {
+      interface User {
+        email: string;
+        name: Maybe<string>;
+        surname: Maybe<string>;
+      }
+      const user: User = {
+        email: 'user@example.com',
+        name: just('John'),
+        surname: just('Doe')
+      };
+      const getFullName = (name: string, surname: string) =>
+        `${name} ${surname}`;
+      const maybeFullname = map2(getFullName, user.name, user.surname);
+      const fullName = withDefault(maybeFullname, '');
+      expect(fullName).to.equal('John Doe');
+    });
+
+    it('should work 2', () => {
+      const prices: Maybe<number>[] = [
+        just(300),
+        nothing(),
+        just(500),
+        just(150),
+        nothing()
+      ];
+      const sum = (a: number, b: number) => a + b;
+      const total = withDefault(
+        prices
+          .filter(n => !equals(n, nothing()))
+          .reduce((acc, current) => map2(sum, acc, current), just(0)),
+        0
+      );
+      expect(total).to.equal(950);
     });
   });
 });

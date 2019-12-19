@@ -9,6 +9,7 @@
     "array-type": false,
     "arrow-parens": false,
     "no-unused-expression": false,
-    "object-literal-sort-keys": false
+    "object-literal-sort-keys": false,
+    "interface-name": false
   }
 }

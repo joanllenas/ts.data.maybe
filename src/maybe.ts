@@ -146,3 +146,26 @@ export const caseOf = <A, B>(
     return caseof.Just((value as Just<A>)._value);
   }
 };
+
+export const equals = <T>(a: Maybe<T>, b: Maybe<T>): boolean =>
+  caseOf(
+    {
+      Just: (va: T) =>
+        caseOf(
+          {
+            Just: (vb: T) => va === vb,
+            Nothing: () => false
+          },
+          b
+        ),
+      Nothing: () =>
+        caseOf(
+          {
+            Just: (vb: T) => false,
+            Nothing: () => true
+          },
+          b
+        )
+    },
+    a
+  );
