@@ -13,6 +13,8 @@ type Maybe<T> = Just<T> | Nothing;
 
 Where `Nothing` is an instance of `Nothing`, `null` or `undefined`, and `Just` represents any non `Nothing` value.
 
+> If this is new to you, you may want to read the introductory article [Safer code with container types](https://blog.logrocket.com/safer-code-with-container-types-either-and-maybe/) about why and how to use this library.
+
 ## Install
 
 ```
