@@ -1,6 +1,6 @@
 {
   "name": "ts.data.maybe",
-  "version": "2.2.0",
+  "version": "2.2.1",
   "description": "A Typescript implementation of the Maybe data type",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",

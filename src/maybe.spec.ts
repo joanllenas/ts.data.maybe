@@ -35,6 +35,14 @@ describe('Maybe', () => {
     it('should return false when undefined is provided', () => {
       expect(isJust(undefined as any)).to.be.false;
     });
+    it('should narrow the type', () => {
+      const v = just('hello');
+      if (isJust(v)) {
+        expect(v._value).to.eq('hello');
+      } else {
+        throw new Error('Impossible state');
+      }
+    });
   });
 
   describe('isNothing', () => {
@@ -49,6 +57,14 @@ describe('Maybe', () => {
     });
     it('should return true when undefined is provided', () => {
       expect(isNothing(undefined as any)).to.be.true;
+    });
+    it('should narrow the type', () => {
+      const v = nothing();
+      if (isNothing(v)) {
+        expect(v).to.eql(nothing());
+      } else {
+        throw new Error('Impossible state');
+      }
     });
   });
 

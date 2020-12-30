@@ -16,11 +16,11 @@ export const nothing = <T>(): Maybe<T> => {
   return new Nothing();
 };
 
-export const isJust = <T>(value: Maybe<T>) => {
+export const isJust = <T>(value: Maybe<T>): value is Just<T> => {
   return value instanceof Just;
 };
 
-export const isNothing = <T>(value: Maybe<T>) => {
+export const isNothing = <T>(value: Maybe<T>): value is Nothing => {
   return value instanceof Nothing || value === null || value === undefined;
 };
 
