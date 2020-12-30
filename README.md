@@ -87,7 +87,7 @@ nothing<number>(); // Nothing (Maybe<number>)
 
 ### isJust
 
-`isJust(value: Maybe<any>): boolean;`
+`isJust<T>(value: Maybe<T>): value is Just<T>;`
 
 Returns true if a value is an instance of `Just`.
 
@@ -97,7 +97,7 @@ isJust(nothing()); // false
 
 ### isNothing
 
-`isNothing(value: Maybe<any>): boolean;`
+`isNothing<T>(value: Maybe<T>): value is Nothing;`
 
 Returns true if a value is an instance of `Nothing`.
 
